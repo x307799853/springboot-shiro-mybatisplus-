@@ -1,0 +1,67 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://172.24.48.69:8761/eureka/
+  #instance: clientName
+spring:
+  application:
+    name: admin-service
+  profiles:
+    active: dev
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      enabled: true
+#  redis:
+#    host: localhost
+#    port: 6379
+#    password: dw1234
+#    database: 0
+#    timeout: 6000ms # connect time out
+#    jedis:
+#      pool:
+#        max-active: 1000
+#        max-wait: -1ms
+#        max-idle: 10
+#        min-idle: 5
+
+server:
+  port: 9002
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  connection-timeout: 5000ms
+  servlet:
+    context-path: /api
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.mwi.admin.modules.*.entity
+  global-config:
+    db-config:
+      #主键类型  AUTO:"数据库ID自增", INPUT:"用户输入ID", ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID";
+      id-type: auto
+      #字段策略 IGNORED:"忽略判断",NOT_NULL:"非 NULL 判断"),NOT_EMPTY:"非空判断"
+      field-strategy: not_null
+      logic-delete-value: -1
+      logic-not-delete-value: 0
+    banner: false
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    call-setters-on-nulls: true
+    jdbc-type-for-null: 'null'
+mwi:
+  jwt:
+    expire: 604800 #7days unit(s)
+    secret: f4e2e52034348f86b67cde581c0f9eb5
+    header: token
+
+    #TODO 异常拦截
+
